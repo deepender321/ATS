@@ -1,0 +1,11 @@
+[2024-11-11 08:54:28] [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1d23h43m4s45ms781µs800ns).
+[2024-11-11 10:09:16] [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46s788ms760µs500ns).
+[2024-11-11 16:37:35] [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m42s351ms387µs200ns).
+[2024-11-11 17:27:56] [HikariPool-1 housekeeper] WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=24m51s35ms155µs700ns).
+[2024-11-11 17:29:25] [RMI TCP Connection(801)-127.0.0.1] INFO  org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+[2024-11-11 17:29:29] [scheduling-1] INFO  com.leverage.ApplicationServices.service.EmailService - Email with attachment sent to saikrishnakorrapati1212@gmail.com
+[2024-11-11 17:29:31] [scheduling-1] INFO  com.leverage.ApplicationServices.service.EmailService - Email with attachment sent to saikrishnakorrapati1212@gmail.com
+[2024-11-11 17:29:32] [RMI TCP Connection(801)-127.0.0.1] INFO  org.apache.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+[2024-11-11 17:29:32] [RMI TCP Connection(801)-127.0.0.1] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[2024-11-11 17:29:32] [RMI TCP Connection(801)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[2024-11-11 17:29:32] [RMI TCP Connection(801)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

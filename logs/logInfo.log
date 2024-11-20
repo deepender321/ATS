@@ -1,0 +1,56 @@
+[2024-11-08 09:36:13] [main] INFO  com.leverage.ApplicationServices.ApplicationServicesApplication - Starting ApplicationServicesApplication using Java 17.0.11 with PID 26604 (C:\Users\saiko\ATS_LT\ApplicationServices\target\classes started by saiko in C:\Users\saiko\ATS_LT\ApplicationServices)
+[2024-11-08 09:36:13] [main] INFO  com.leverage.ApplicationServices.ApplicationServicesApplication - No active profile set, falling back to 1 default profile: "default"
+[2024-11-08 09:36:14] [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2024-11-08 09:36:14] [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 115 ms. Found 7 JPA repository interfaces.
+[2024-11-08 09:36:15] [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+[2024-11-08 09:36:15] [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+[2024-11-08 09:36:15] [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+[2024-11-08 09:36:15] [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+[2024-11-08 09:36:15] [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+[2024-11-08 09:36:15] [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1554 ms
+[2024-11-08 09:36:15] [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+[2024-11-08 09:36:15] [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+[2024-11-08 09:36:15] [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[2024-11-08 09:36:15] [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+[2024-11-08 09:36:15] [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+[2024-11-08 09:36:16] [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@391dfe7c
+[2024-11-08 09:36:16] [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+[2024-11-08 09:36:17] [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[2024-11-08 09:36:17] [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2024-11-08 09:36:18] [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[2024-11-08 09:36:18] [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+[2024-11-08 09:36:18] [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+[2024-11-08 09:36:18] [main] INFO  com.leverage.ApplicationServices.ApplicationServicesApplication - Started ApplicationServicesApplication in 5.607 seconds (process running for 6.866)
+[2024-11-08 09:39:49] [RMI TCP Connection(7)-127.0.0.1] INFO  org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+[2024-11-08 09:39:49] [RMI TCP Connection(7)-127.0.0.1] INFO  org.apache.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+[2024-11-08 09:39:49] [RMI TCP Connection(7)-127.0.0.1] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[2024-11-08 09:39:49] [RMI TCP Connection(7)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[2024-11-08 09:39:49] [RMI TCP Connection(7)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+[2024-11-08 09:39:52] [main] INFO  com.leverage.ApplicationServices.ApplicationServicesApplication - Starting ApplicationServicesApplication using Java 17.0.11 with PID 2324 (C:\Users\saiko\ATS_LT\ApplicationServices\target\classes started by saiko in C:\Users\saiko\ATS_LT\ApplicationServices)
+[2024-11-08 09:39:52] [main] INFO  com.leverage.ApplicationServices.ApplicationServicesApplication - No active profile set, falling back to 1 default profile: "default"
+[2024-11-08 09:39:53] [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+[2024-11-08 09:39:53] [main] INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 102 ms. Found 7 JPA repository interfaces.
+[2024-11-08 09:39:54] [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+[2024-11-08 09:39:54] [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+[2024-11-08 09:39:54] [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+[2024-11-08 09:39:54] [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.28]
+[2024-11-08 09:39:54] [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+[2024-11-08 09:39:54] [main] INFO  org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1508 ms
+[2024-11-08 09:39:54] [main] INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+[2024-11-08 09:39:54] [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+[2024-11-08 09:39:54] [main] INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[2024-11-08 09:39:55] [main] INFO  org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+[2024-11-08 09:39:55] [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+[2024-11-08 09:39:55] [main] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6f65a203
+[2024-11-08 09:39:55] [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+[2024-11-08 09:39:56] [main] INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[2024-11-08 09:39:56] [main] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+[2024-11-08 09:39:57] [main] WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+[2024-11-08 09:39:57] [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+[2024-11-08 09:39:57] [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+[2024-11-08 09:39:57] [main] INFO  com.leverage.ApplicationServices.ApplicationServicesApplication - Started ApplicationServicesApplication in 5.55 seconds (process running for 6.654)
+[2024-11-08 09:40:03] [RMI TCP Connection(2)-127.0.0.1] INFO  org.springframework.boot.admin.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin - Application shutdown requested.
+[2024-11-08 09:40:03] [RMI TCP Connection(2)-127.0.0.1] INFO  org.apache.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+[2024-11-08 09:40:03] [RMI TCP Connection(2)-127.0.0.1] INFO  org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+[2024-11-08 09:40:03] [RMI TCP Connection(2)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+[2024-11-08 09:40:03] [RMI TCP Connection(2)-127.0.0.1] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
