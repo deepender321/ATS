@@ -1,10 +1,27 @@
-FROM openjdk:17-jdk-slim
+# Use Maven image to build the project
+FROM maven:3.8.6-openjdk-17-slim AS build
 
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the .jar file from logs to the container
-COPY logs/Applicationservices.jar /app/Applicationservices.jar
+# Copy the pom.xml and the source code to the container
+COPY pom.xml /app
+COPY src /app/src
 
-# Run the .jar file
-CMD ["java", "-jar", "/app/Applicationservices.jar"]
+# Build the .jar file using Maven
+RUN mvn clean package -DskipTests
+
+# Use a lightweight JRE image to run the application
+FROM openjdk:17-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the .jar file from the build stage to the current working directory
+COPY --from=build /logs/ApplicationServices-0.0.1-SNAPSHOT.jar /app/ApplicationServices-0.0.1-SNAPSHOT.jar
+
+# Expose the port the application will run on
+EXPOSE 8080
+
+# Command to run the application
+ENTRYPOINT ["java", "-jar", "/app/ApplicationServices-0.0.1-SNAPSHOT.jar"]
