@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copy the JAR file from your build directory (you'll update this after your Maven build)
-COPY target/Applicationservices.jar /app/Applicationservices.jar
+COPY logs/Applicationservices.jar /app/Applicationservices.jar
 
 # Run the JAR file
 ENTRYPOINT ["java", "-jar", "/app/Applicationservices.jar"]
