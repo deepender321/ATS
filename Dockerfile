@@ -18,10 +18,10 @@ FROM openjdk:17-slim
 WORKDIR /app
 
 # Copy the .jar file from the build stage to the current working directory
-COPY --from=build /logs/ApplicationServices-0.0.1-SNAPSHOT.jar /app/ApplicationServices-0.0.1-SNAPSHOT.jar
+COPY --from=build /target/ApplicationServices-0.0.1-SNAPSHOT.jar /app/ApplicationServices-0.0.1-SNAPSHOT.jar
 
 # Expose the port the application will run on
-EXPOSE 8080
+#EXPOSE 8080
 
 # Command to run the application
 ENTRYPOINT ["java", "-jar", "/app/ApplicationServices-0.0.1-SNAPSHOT.jar"]
