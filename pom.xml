@@ -12,7 +12,7 @@
 	<groupId>com.leverage</groupId>
 	<artifactId>ApplicationServices</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>build</name>
+	<name>ApplicationServices</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
