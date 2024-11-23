@@ -1,5 +1,5 @@
 # Use Maven image to build the project
-FROM maven:3.8.6-openjdk-17-slim AS build
+FROM maven:3.8.6-eclipse-temurin-17-slim AS build
 
 # Set the working directory in the container
 WORKDIR /app
@@ -18,7 +18,7 @@ FROM openjdk:17-slim
 WORKDIR /app
 
 # Copy the .jar file from the build stage to the current working directory
-COPY --from=build /logs/ApplicationServices-0.0.1-SNAPSHOT.jar /app/ApplicationServices-0.0.1-SNAPSHOT.jar
+COPY --from=build /app/target/ApplicationServices-0.0.1-SNAPSHOT.jar /app/ApplicationServices-0.0.1-SNAPSHOT.jar
 
 # Expose the port the application will run on
 #EXPOSE 8080
