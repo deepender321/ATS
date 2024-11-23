@@ -1,5 +1,5 @@
-# Use Maven image to build the project
-FROM maven:3.8.6-eclipse-temurin-17-slim AS build
+# Use Maven image with Amazon Corretto (Java 17) to build the project
+FROM maven:3.8.6-amazoncorretto-17 AS build
 
 # Set the working directory in the container
 WORKDIR /app
