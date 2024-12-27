@@ -23,7 +23,7 @@ public class InterviewDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "interview_id")
-	private int id;
+	private Integer id;
 	private String result;
 	private String questions;
 	private LocalDateTime scheduledDate;
