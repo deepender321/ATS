@@ -23,7 +23,7 @@ public class MarketingMember {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="member_id")
-    private int id;
+    private Integer id;
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
