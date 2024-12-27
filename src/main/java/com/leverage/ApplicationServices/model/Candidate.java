@@ -24,7 +24,7 @@ public class Candidate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="candidate_id")
-    private int id;
+    private Integer id;
     
     @ManyToOne
     @JoinColumn(name = "member_id", referencedColumnName = "member_id")
