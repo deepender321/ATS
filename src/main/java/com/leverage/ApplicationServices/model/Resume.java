@@ -16,7 +16,7 @@ public class Resume {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="resume_id")
-    private int id;
+    private Integer id;
     private String fileName;
     private String filePath; 
 	@Lob
