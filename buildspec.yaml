@@ -30,18 +30,23 @@ phases:
       - echo "Saving Docker image to a tarball..."
       - docker save ats-lt-docker-image | gzip > ats-lt-docker-image.tar.gz  # Save Docker image to tarball
 
-  #post_build:
-  #  commands:
-   #   - echo "Post-build actions..."
-    #  - echo "Uploading Docker image to S3..."
-   #   - aws s3 cp ats-lt-docker-image.tar.gz s3://$S3_BUCKET/$S3_PATH/ats-lt-docker-image.tar.gz
-   #   - echo "Docker image uploaded to S3 successfully!"
+  post_build:
+    commands:
+      - echo "Generating imagedefinitions.json for ECS deployment..."
+      - IMAGE_URI="s3://$S3_BUCKET/$S3_PATH/ats-lt-docker-image.tar.gz"  # S3 path for the Docker image tarball
+      - printf '[{"name":"my-container","imageUri":"%s"}]' $IMAGE_URI > imagedefinitions.json
+      - echo "imagedefinitions.json generated successfully!"
+
+      # Upload Docker image tarball and imagedefinitions.json to S3
+      - aws s3 cp ats-lt-docker-image.tar.gz s3://$S3_BUCKET/$S3_PATH/ats-lt-docker-image.tar.gz
+      - aws s3 cp imagedefinitions.json s3://$S3_BUCKET/$S3_PATH/imagedefinitions.json
+      - echo "Docker image and imagedefinitions.json uploaded to S3 successfully!"
 
 artifacts:
   files:
     - target/*.jar  # Include the Maven JAR file
     - ats-lt-docker-image.tar.gz  # Include the Docker image tarball
-    - imagedefinitions.json
+    - imagedefinitions.json        # Include the generated imagedefinitions.json
   discard-paths: yes
 
 cache:
