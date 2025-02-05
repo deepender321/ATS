@@ -1,0 +1,30 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      # Define image tag
+      - IMAGE_TAG=$(date +%Y%m%d%H%M%S)
+      # Define S3 location for the image
+      - IMAGE_URI="s3://your-bucket-name/path/to/artifacts/$IMAGE_TAG"
+  build:
+    commands:
+      # Build the Docker image using the Dockerfile in the repository
+      - echo "Building Docker image..."
+      - docker build -t $IMAGE_URI .
+  post_build:
+    commands:
+      # Upload the Docker image to S3
+      - echo "Pushing Docker image to S3..."
+      - docker save $IMAGE_URI | gzip > /tmp/$IMAGE_TAG.tar.gz
+      - aws s3 cp /tmp/$IMAGE_TAG.tar.gz $IMAGE_URI
+      # Generate the imagedefinitions.json for ECS
+      - echo "Creating imagedefinitions.json..."
+      - printf '[{"name":"my-container","imageUri":"%s"}]' $IMAGE_URI > imagedefinitions.json
+      # Output the file for logging
+      - cat imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
+    - /tmp/$IMAGE_TAG.tar.gz
