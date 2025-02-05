@@ -1,30 +1,49 @@
 version: 0.2
 
+env:
+  variables:
+    S3_BUCKET: "ats-lt-build"    # Replace with your S3 bucket name
+    S3_PATH: "build"             # Folder path in the S3 bucket
+
 phases:
+  install:
+    runtime-versions:
+      java: corretto17
+    commands:
+      - echo "Installing Docker..."
+      - yum update -y
+      - yum install -y docker  # Install Docker using yum
+      - docker --version       # Verify Docker installation
+
   pre_build:
     commands:
-      # Define image tag
-      - IMAGE_TAG=$(date +%Y%m%d%H%M%S)
-      # Define S3 location for the image
-      - IMAGE_URI="s3://ats-lt-build/ats-deployment/BuildArtif/$IMAGE_TAG"
+      - echo "Verifying Docker installation..."
+      - docker --version       # Check Docker version
+
   build:
     commands:
-      # Build the Docker image using the Dockerfile in the repository
+      - echo "Starting Maven build..."
+      - mvn clean install  # Clean and build the Maven project
+      - echo "Build completed successfully!"
       - echo "Building Docker image..."
-      - docker build -t $IMAGE_URI .
-  post_build:
-    commands:
-      # Upload the Docker image to S3
-      - echo "Pushing Docker image to S3..."
-      - docker save $IMAGE_URI | gzip > /tmp/$IMAGE_TAG.tar.gz
-      - aws s3 cp /tmp/$IMAGE_TAG.tar.gz $IMAGE_URI
-      # Generate the imagedefinitions.json for ECS
-      - echo "Creating imagedefinitions.json..."
-      - printf '[{"name":"my-container","imageUri":"%s"}]' $IMAGE_URI > imagedefinitions.json
-      # Output the file for logging
-      - cat imagedefinitions.json
+      - docker build -t ats-lt-docker-image .  # Build Docker image from DockerFile
+      - echo "Saving Docker image to a tarball..."
+      - docker save ats-lt-docker-image | gzip > ats-lt-docker-image.tar.gz  # Save Docker image to tarball
+
+  #post_build:
+  #  commands:
+   #   - echo "Post-build actions..."
+    #  - echo "Uploading Docker image to S3..."
+   #   - aws s3 cp ats-lt-docker-image.tar.gz s3://$S3_BUCKET/$S3_PATH/ats-lt-docker-image.tar.gz
+   #   - echo "Docker image uploaded to S3 successfully!"
 
 artifacts:
   files:
+    - target/*.jar  # Include the Maven JAR file
+    - ats-lt-docker-image.tar.gz  # Include the Docker image tarball
     - imagedefinitions.json
-    - /tmp/$IMAGE_TAG.tar.gz
+  discard-paths: yes
+
+cache:
+  paths:
+    - "~/.m2/**/*"  # Cache Maven dependencies to speed up subsequent builds
