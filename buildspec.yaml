@@ -6,7 +6,7 @@ phases:
       # Define image tag
       - IMAGE_TAG=$(date +%Y%m%d%H%M%S)
       # Define S3 location for the image
-      - IMAGE_URI="s3://your-bucket-name/path/to/artifacts/$IMAGE_TAG"
+      - IMAGE_URI="s3://ats-lt-build/ats-deployment/BuildArtif/$IMAGE_TAG"
   build:
     commands:
       # Build the Docker image using the Dockerfile in the repository
