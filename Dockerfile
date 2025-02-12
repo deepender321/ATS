@@ -1,9 +1,8 @@
-# Use Amazon ECR Maven and Amazon Corretto (Java 17) images to avoid Docker Hub rate limits
-FROM public.ecr.aws/amazoncorretto/amazoncorretto:17-alpine AS build
+# Use Amazon Corretto 17 for building the project
+FROM amazoncorretto:17-alpine AS build
 
 # Install Maven
-FROM public.ecr.aws/amazonlinux/amazonlinux:2 AS maven
-RUN yum install -y java-17-amazon-corretto maven
+RUN apk add --no-cache maven
 
 # Set the working directory in the container
 WORKDIR /app
@@ -16,7 +15,7 @@ COPY src /app/src
 RUN mvn clean package -DskipTests
 
 # Use a lightweight JRE image to run the application
-FROM public.ecr.aws/amazoncorretto/amazoncorretto:17-alpine
+FROM amazoncorretto:17-alpine
 
 # Set the working directory
 WORKDIR /app
