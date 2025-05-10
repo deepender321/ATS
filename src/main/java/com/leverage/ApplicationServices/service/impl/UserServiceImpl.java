@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -123,69 +124,169 @@ public class UserServiceImpl implements UserService {
         return userRepo.findById(userId).orElse(null);
     }
 
+//    @Override
+//    public ResponseEntity<?> createUserByAdmin(CreateUserRequestDto createUserRequest) {
+//        UserRequestDto userRequest = createUserRequest.getUserRequest();
+//        CandidateRequestDto candidateRequest = createUserRequest.getCandidateRequest();
+//        User user = new User();
+//
+//        user.setFirstName(userRequest.getFirstName());
+//        user.setLastName(userRequest.getLastName());
+//        user.setMail(userRequest.getMail());
+//        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+//        user.setRoles(userRequest.getRole());
+//        user.setMobileNumber(userRequest.getMobileNumber());
+//
+//        String subject = "Welcome to the ATS System";
+//        String text = "Hello " + user.getFirstName() + ",\n\nYou have been successfully registered as a candidate.";
+//        emailService.sendEmailToCandidate(user.getMail(), userRequest.getPassword(), subject, text);
+//
+//        User savedUser = null;
+//        boolean userCreated = false;
+//
+//        switch (user.getRoles()) {
+//            case ADMIN -> {
+//                Admin admin = new Admin();
+//                admin.setUser(user);
+//                adminService.createAdmin(admin);
+//                log.info("created a new Admin");
+//                userCreated = true;
+//            }
+//            case MARKETING -> {
+//                MarketingMember marketingMember = new MarketingMember();
+//                marketingMember.setUser(user);
+//                marketingMemberService.createMarketingMember(marketingMember);
+//                log.info("created a new Member");
+//                userCreated = true;
+//            }
+//            case CANDIDATE -> {
+//                MarketingMember member = marketingMemberService.getMarketingMemberById(candidateRequest.getMarketingMemberId());
+//                if (member == null) {
+//                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Marketing Member not found.");
+//                }
+//                log.info("created a new CANDIDATE");
+//                userCreated = true;
+//            }
+//            default -> {
+//                return ResponseEntity.badRequest().body("Invalid access level.");
+//            }
+//        }
+//
+//        if (userCreated) {
+//            savedUser = createUser(user);
+//            if (candidateRequest != null) {
+//                Candidate candidate = new Candidate();
+//                candidate.setUser(savedUser);
+//                candidate.setMarketingMember(marketingMemberService.getMarketingMemberById(candidateRequest.getMarketingMemberId()));
+//                candidateService.createCandidate(candidate);
+//            }
+//            log.info("created a new user");
+//            return ResponseEntity.status(HttpStatus.OK).body("User created successfully");
+//        } else {
+//        	  log.error("User creation failed",HttpStatus.INTERNAL_SERVER_ERROR);
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("User creation failed.");
+//        }
+//
+//
+//    }
+
     @Override
     public ResponseEntity<?> createUserByAdmin(CreateUserRequestDto createUserRequest) {
-        UserRequestDto userRequest = createUserRequest.getUserRequest();
-        CandidateRequestDto candidateRequest = createUserRequest.getCandidateRequest();
-        User user = new User();
+        try {
+            UserRequestDto userRequest = createUserRequest.getUserRequest();
+            CandidateRequestDto candidateRequest = createUserRequest.getCandidateRequest();
+            JobApplicationsRequestDto jobRequest = createUserRequest.getJobApplicationRequest();
 
-        user.setFirstName(userRequest.getFirstName());
-        user.setLastName(userRequest.getLastName());
-        user.setMail(userRequest.getMail());
-        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-        user.setRoles(userRequest.getRole());
-        user.setMobileNumber(userRequest.getMobileNumber());
-
-        String subject = "Welcome to the ATS System";
-        String text = "Hello " + user.getFirstName() + ",\n\nYou have been successfully registered as a candidate.";
-        emailService.sendEmailToCandidate(user.getMail(), userRequest.getPassword(), subject, text);
-
-        User savedUser = null;
-        boolean userCreated = false;
-
-        switch (user.getRoles()) {
-            case ADMIN -> {
-                Admin admin = new Admin();
-                admin.setUser(user);
-                adminService.createAdmin(admin);
-                log.info("created a new Admin");
-                userCreated = true;
+            if (userRequest == null || userRequest.getRole() == null) {
+                return ResponseEntity.badRequest().body("Missing userRequest or role.");
             }
-            case MARKETING -> {
-                MarketingMember marketingMember = new MarketingMember();
-                marketingMember.setUser(user);
-                marketingMemberService.createMarketingMember(marketingMember);
-                log.info("created a new Member");
-                userCreated = true;
+
+            //  Create base User
+            User user = new User();
+            user.setFirstName(userRequest.getFirstName());
+            user.setLastName(userRequest.getLastName());
+            user.setMail(userRequest.getMail());
+            user.setMobileNumber(userRequest.getMobileNumber());
+            user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+            user.setRoles(userRequest.getRole());
+
+            User savedUser = userRepo.save(user);
+
+            //  Optional welcome email
+            try {
+                String subject = "Welcome to the ATS System";
+                String text = "Hello " + user.getFirstName() + ",\n\nYou have been successfully registered.";
+                emailService.sendEmailToCandidate(user.getMail(), userRequest.getPassword(), subject, text);
+            } catch (Exception e) {
+                log.warn(" Failed to send email: {}", e.getMessage());
             }
-            case CANDIDATE -> {
-                MarketingMember member = marketingMemberService.getMarketingMemberById(candidateRequest.getMarketingMemberId());
-                if (member == null) {
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Marketing Member not found.");
+
+//            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//            boolean matches = encoder.matches(userRequest.getPassword(), savedUser.getPassword());
+//            if (matches) {
+//                log.info("Password matches for user: {}", user.getMail());
+//            } else {
+//                log.error("Password does not match for user: {}", user.getMail());
+//            }
+
+            //  Role handling
+            switch (user.getRoles()) {
+                case ADMIN -> {
+                    if (candidateRequest != null || jobRequest != null) {
+                        return ResponseEntity.badRequest().body("ADMIN should not contain candidate/job data.");
+                    }
+                    Admin admin = new Admin();
+                    admin.setUser(savedUser);
+                    adminService.createAdmin(admin);
+                    log.info(" Created new ADMIN");
                 }
-                log.info("created a new CANDIDATE");
-                userCreated = true;
-            }
-            default -> {
-                return ResponseEntity.badRequest().body("Invalid access level.");
-            }
-        }
 
-        if (userCreated) {
-            savedUser = createUser(user);
-            if (candidateRequest != null) {
-                Candidate candidate = new Candidate();
-                candidate.setUser(savedUser);
-                candidate.setMarketingMember(marketingMemberService.getMarketingMemberById(candidateRequest.getMarketingMemberId()));
-                candidateService.createCandidate(candidate);
+                case MARKETING -> {
+                    if (candidateRequest != null) {
+                        return ResponseEntity.badRequest().body("MARKETING should not contain candidateRequest.");
+                    }
+                    MarketingMember marketingMember = new MarketingMember();
+                    marketingMember.setUser(savedUser);
+                    marketingMemberService.createMarketingMember(marketingMember);
+                    log.info(" Created new MARKETING MEMBER");
+                }
+
+                case CANDIDATE -> {
+                    if (candidateRequest == null) {
+                        return ResponseEntity.badRequest().body("CANDIDATE must include valid marketingMemberId.");
+                    }
+
+                    MarketingMember member = marketingMemberService.getMarketingMemberById(candidateRequest.getMarketingMemberId());
+                    if (member == null) {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Marketing Member not found.");
+                    }
+
+                    Candidate candidate = new Candidate();
+                    candidate.setUser(savedUser);
+                    candidate.setMarketingMember(member);
+                    candidateService.createCandidate(candidate);
+
+                    // (Optional) handle jobRequest here
+                    log.info(" Created new CANDIDATE");
+                }
+
+                default -> {
+                    return ResponseEntity.badRequest().body(" Invalid role specified.");
+                }
             }
-            log.info("created a new user");
-            return ResponseEntity.status(HttpStatus.OK).body("User created successfully");
-        } else {
-        	  log.error("User creation failed",HttpStatus.INTERNAL_SERVER_ERROR);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("User creation failed.");
+
+            //  Save user last
+         //   userRepo.save(user);
+            log.info(" Final user record saved: {}", user.getMail());
+
+            return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully");
+        } catch (Exception e) {
+            log.error(" Unexpected error during user creation", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Unexpected error: " + e.getMessage());
         }
     }
+
 
     @Override
     public ResponseEntity<?> updateUserByAdmin(Integer userId, CreateUserRequestDto createUserRequest) {

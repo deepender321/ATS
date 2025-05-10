@@ -3,6 +3,7 @@ package com.leverage.ApplicationServices.controller;
 import com.leverage.ApplicationServices.DTO.AuthRequestDto;
 import com.leverage.ApplicationServices.service.AuthService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -30,6 +31,7 @@ public class AuthenticationController {
         log.info("Attempting to sign in user with email: {}", authRequestDto.getMailId());
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDto.getMailId(), authRequestDto.getPassword()));
+
             log.info("Authentication successful for user: {}", authRequestDto.getMailId());
         } catch (BadCredentialsException e) {
             log.error("Authentication failed: {}", e.getMessage());
@@ -37,4 +39,21 @@ public class AuthenticationController {
         }
         return ResponseEntity.ok(authService.authenticate(authRequestDto));
     }
+
+
+//    @PostMapping()
+//    public ResponseEntity<?> signIn(@RequestBody AuthRequestDto authRequestDto) {
+//        log.info(" Attempting to sign in user with email: {}", authRequestDto.getMailId());
+//
+//        try {
+//            Object response = authService.authenticate(authRequestDto); //  Custom logic with passwordEncoder
+//            log.info("Authentication successful for user: {}", authRequestDto.getMailId());
+//            return ResponseEntity.ok(response);
+//        } catch (Exception e) {
+//            log.error(" Authentication failed for user: {} — {}", authRequestDto.getMailId(), e.getMessage());
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect username or password");
+//        }
+//    }
 }
+
+

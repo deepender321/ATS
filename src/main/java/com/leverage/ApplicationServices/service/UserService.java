@@ -8,7 +8,9 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
-public interface UserService {
+public interface
+
+UserService {
 
 	User createUser(User user);
 

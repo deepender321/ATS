@@ -18,8 +18,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: saikrishnakorrapati05@gmail.com
-    password: hthejwaqttdrlwrm
+    username: deependhar2deepu@gmail.com
+    password: eriqjzbcmkplgokr
     properties:
       mail:
         smtp:
@@ -40,7 +40,7 @@ spring:
           google:
             authorization-uri: https://accounts.google.com/o/oauth2/auth
             token-uri: https://oauth2.googleapis.com/token
-            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+            user-info-uri: https://www.googleapis.com1/oauth2/v3/userinfo
             user-name-attribute: sub
 
 
@@ -64,3 +64,4 @@ logging:
     root: info
     sql: error
     org.springframework.security: trace
+    org.springframework.web: DEBUG

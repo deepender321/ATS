@@ -24,6 +24,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -66,13 +67,13 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**")
                         .permitAll()
                         .requestMatchers("/user/**").hasRole("ADMIN")
-                        .requestMatchers("/marketingMember/**").hasAnyRole("ADMIN","MARKETING")
-                        .requestMatchers("/candidate/**").hasAnyRole("ADMIN","CANDIDATE")
+                        .requestMatchers("/marketingMember/**").hasAnyRole("ADMIN", "MARKETING")
+                        .requestMatchers("/candidate/**").hasAnyRole("ADMIN", "CANDIDATE")
                         .anyRequest().authenticated()
                 )
                 .userDetailsService(userManagerConfig)
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()))
-                .addFilterBefore(new JwtAccessTokenFilter(rsaKeyRecord, jwtTokenUtils,userRepo), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtAccessTokenFilter(rsaKeyRecord, jwtTokenUtils, userRepo), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(ex -> {
                     ex.authenticationEntryPoint((request, response, authException) -> {
@@ -85,7 +86,7 @@ public class SecurityConfig {
                         // Custom error message for forbidden access (403)
                         response.setContentType("application/json");
                         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-                        response.getWriter().write("{\"error\": \"Access denied: Insufficient permissions for this action.\"" +accessDeniedException.getMessage()+ "\" }");
+                        response.getWriter().write("{\"error\": \"Access denied: Insufficient permissions for this action.\"" + accessDeniedException.getMessage() + "\" }");
                         log.error("[SecurityConfig] Access denied: {}", accessDeniedException.getMessage());
                     });
                 })
@@ -105,7 +106,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    JwtEncoder jwtEncoder(){
+    JwtEncoder jwtEncoder() {
         JWK jwk = new RSAKey.Builder(rsaKeyRecord.rsaPublicKey())
                 .privateKey(rsaKeyRecord.rsaPrivateKey()).build();
         JWKSource<SecurityContext> jwkSource = new ImmutableJWKSet<>(new JWKSet(jwk));
@@ -113,10 +114,9 @@ public class SecurityConfig {
     }
 
     @Bean
-    JwtDecoder jwtDecoder(){
+    JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder.withPublicKey(rsaKeyRecord.rsaPublicKey()).build();
     }
-
 
 
     @Bean
@@ -131,18 +131,18 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
+//
+  @Bean
+        public PasswordEncoder passwordEncoder() {
+         //  return new BCryptPasswordEncoder();
+           return NoOpPasswordEncoder.getInstance(); // This allows plain text passwords
+    }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance(); // This allows plain text passwords
+//
+//    @Bean
+//    PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
     }
 
 
 
-
-//    @Bean
-//    PasswordEncoder passwordEncoder(){
-//        return new BCryptPasswordEncoder();
-//    }
-
-}
