@@ -65,10 +65,12 @@ phases:
         )
       - echo "$TASK_DEFINITION_JSON" > task-definition.json
       - cat task-definition.json
+      - echo '[{"name":"ats-container","imageUri":"'"$REPO_URI:$IMAGE_TAG"'"}]' > imagedefinitions.json
       - aws ecs register-task-definition --cli-input-json file://task-definition.json
 
 artifacts:
   files:
+    - imagedefinitions.json
     - task-definition.json
 
 cache:
