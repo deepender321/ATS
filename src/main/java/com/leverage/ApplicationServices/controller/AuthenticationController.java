@@ -2,6 +2,7 @@ package com.leverage.ApplicationServices.controller;
 
 import com.leverage.ApplicationServices.DTO.AuthRequestDto;
 import com.leverage.ApplicationServices.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,7 @@ public class AuthenticationController {
     }
 
     @PostMapping()
-    public ResponseEntity<?> signIn(@RequestBody AuthRequestDto authRequestDto){
+    public ResponseEntity<?> signIn(@Valid @RequestBody AuthRequestDto authRequestDto){
         log.info("Attempting to sign in user with email: {}", authRequestDto.getMailId());
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDto.getMailId(), authRequestDto.getPassword()));

@@ -6,6 +6,7 @@ import com.leverage.ApplicationServices.Exception.Exception.EmailAlreadyExistsEx
 import com.leverage.ApplicationServices.Exception.Exception.MobileNumberAlreadyExistsException;
 import com.leverage.ApplicationServices.model.User;
 import com.leverage.ApplicationServices.service.UserService;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class UserController {
 	}
 
 	@PostMapping("/create")
-	public ResponseEntity<?> createUser(@RequestBody CreateUserRequestDto createUserRequest) {
+	public ResponseEntity<?> createUser(@Valid @RequestBody CreateUserRequestDto createUserRequest) {
 		try {
             userService.createUserByAdmin(createUserRequest);
             log.info("creating a new user" ,createUserRequest);
