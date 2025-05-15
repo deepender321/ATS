@@ -73,7 +73,7 @@ public class SecurityConfig {
                 )
                 .userDetailsService(userManagerConfig)
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()))
-                .addFilterBefore(new JwtAccessTokenFilter(rsaKeyRecord, jwtTokenUtils, userRepo), UsernamePasswordAuthenticationFilter.class)
+               .addFilterBefore(new JwtAccessTokenFilter(rsaKeyRecord, jwtTokenUtils, userRepo), UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(ex -> {
                     ex.authenticationEntryPoint((request, response, authException) -> {
@@ -119,13 +119,13 @@ public class SecurityConfig {
     }
 
 
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userManagerConfig);
-        authenticationProvider.setPasswordEncoder(passwordEncoder()); // Use NoOpPasswordEncoder
-        return authenticationProvider;
-    }
+//    @Bean
+//    public AuthenticationProvider authenticationProvider() {
+//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+//        authenticationProvider.setUserDetailsService(userManagerConfig);
+//        authenticationProvider.setPasswordEncoder(passwordEncoder()); // Use NoOpPasswordEncoder
+//        return authenticationProvider;
+//    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
@@ -134,8 +134,8 @@ public class SecurityConfig {
 //
   @Bean
         public PasswordEncoder passwordEncoder() {
-         //  return new BCryptPasswordEncoder();
-           return NoOpPasswordEncoder.getInstance(); // This allows plain text passwords
+           return new BCryptPasswordEncoder();
+         //  return NoOpPasswordEncoder.getInstance(); // This allows plain text passwords
     }
 
 //

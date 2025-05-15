@@ -29,6 +29,9 @@ public class AuthenticationController {
 
     @PostMapping()
     public ResponseEntity<?> signIn(@Valid @RequestBody AuthRequestDto authRequestDto){
+
+        System.out.println(" Login attempt for: " + authRequestDto.getMailId());
+        System.out.println(" Raw password: " + authRequestDto.getPassword());
         log.info("Attempting to sign in user with email: {}", authRequestDto.getMailId());
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDto.getMailId(), authRequestDto.getPassword()));

@@ -32,19 +32,24 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class UserRequestDto {
 
-    @NotBlank(message = "First name is required")
-    @Pattern(regexp = "^[A-Za-z]+$", message = "First name must contain letters only")
+//    @NotNull(message = "First name is required")
+//    @Pattern(regexp = "^[A-Za-z]+$", message = "First name must contain letters only")
+
+
+    @NotNull(message = "First name is required")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "Last name must contain letters only")
     private String firstName;
 
-    @NotBlank(message = "Last name is required")
+    @NotNull(message = "Last name is required")
     @Pattern(regexp = "^[A-Za-z]+$", message = "Last name must contain letters only")
     private String lastName;
 
-    @NotBlank(message = "Email is required")
+    @NotNull(message = "Email is required")
     @Pattern(
-            regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.com$",
+            regexp = "^[A-Za-z0 -9._%+-]+@[A-Za-z0-9.-]+\\.com$",
             message = "Email must be valid and end with .com"
     )
     private String mail;
@@ -58,4 +63,5 @@ public class UserRequestDto {
     @NotBlank(message = "Phone number is required")
     @Pattern(regexp = "^[0-9]{10}$" , message = "Phone number must be 10 digits")
     private String mobileNumber;
+
 }

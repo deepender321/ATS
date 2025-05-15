@@ -21,14 +21,14 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserRepo userRepo;
     private final JwtTokenGenerator jwtTokenGenerator;
-    private final PasswordEncoder passwordEncoder;
+    //private final PasswordEncoder passwordEncoder;
 
     public AuthServiceImpl(UserRepo userRepo,
                            JwtTokenGenerator jwtTokenGenerator,
                            PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.jwtTokenGenerator = jwtTokenGenerator;
-        this.passwordEncoder = passwordEncoder;
+     //   this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -41,16 +41,16 @@ public class AuthServiceImpl implements AuthService {
                     });
 
             //  Diagnostic logs
-            System.out.println(" Encoder class: " + passwordEncoder.getClass().getName());
+         //   System.out.println(" Encoder class: " + passwordEncoder.getClass().getName());
             System.out.println(" Incoming email: " + authRequestDto.getMailId());
             System.out.println(" Incoming raw password: " + authRequestDto.getPassword());
             System.out.println(" Stored DB password: " + user.getPassword());
-            System.out.println(" Match result: " + passwordEncoder.matches(authRequestDto.getPassword(), user.getPassword()));
-
-            // Password check
-            if (!passwordEncoder.matches(authRequestDto.getPassword(), user.getPassword())) {
-                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Incorrect username or password");
-            }
+//            System.out.println(" Match result: " + passwordEncoder.matches(authRequestDto.getPassword(), user.getPassword()));
+//
+//             Password check
+//            if (!passwordEncoder.matches(authRequestDto.getPassword(), user.getPassword())) {
+//                throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Incorrect username or password");
+//            }
 
             String accessToken = jwtTokenGenerator.generateAccessToken(user);
 

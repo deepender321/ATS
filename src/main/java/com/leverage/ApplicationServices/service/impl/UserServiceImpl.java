@@ -124,8 +124,87 @@ public class UserServiceImpl implements UserService {
         return userRepo.findById(userId).orElse(null);
     }
 
+    @Override
+    public ResponseEntity<?> createUserByAdmin(CreateUserRequestDto createUserRequest) {
+        UserRequestDto userRequest = createUserRequest.getUserRequest();
+        CandidateRequestDto candidateRequest = createUserRequest.getCandidateRequest();
+        JobApplicationsRequestDto jobRequest = createUserRequest.getJobApplicationRequest();
+
+        if (userRepo.existsByMail(userRequest.getMail())) {
+            throw new EmailAlreadyExistsException("Email already exists: " + userRequest.getMail());
+        }
+
+        if (userRepo.existsByMobileNumber(userRequest.getMobileNumber())) {
+            throw new MobileNumberAlreadyExistsException("Mobile number already exists: " + userRequest.getMobileNumber());
+        }
+
+        User user = new User();
+        user.setFirstName(userRequest.getFirstName());
+        user.setLastName(userRequest.getLastName());
+        user.setMail(userRequest.getMail());
+        user.setMobileNumber(userRequest.getMobileNumber());
+        user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+        user.setRoles(userRequest.getRole());
+
+        User savedUser = userRepo.save(user);
+
+        try {
+            String subject = "Welcome to the ATS System";
+            String text = "Hello " + user.getFirstName() + ",\n\nYou have been successfully registered.";
+            emailService.sendEmailToCandidate(user.getMail(), userRequest.getPassword(), subject, text);
+        } catch (Exception e) {
+            log.warn("Failed to send email: {}", e.getMessage());
+        }
+
+        switch (user.getRoles()) {
+            case ADMIN -> {
+                if (candidateRequest != null || jobRequest != null) {
+                    return ResponseEntity.badRequest().body("ADMIN should not contain candidate/job data.");
+                }
+                Admin admin = new Admin();
+                admin.setUser(savedUser);
+                adminService.createAdmin(admin);
+            }
+
+            case MARKETING -> {
+                if (candidateRequest != null) {
+                    return ResponseEntity.badRequest().body("MARKETING should not contain candidateRequest.");
+                }
+                MarketingMember marketingMember = new MarketingMember();
+                marketingMember.setUser(savedUser);
+                marketingMemberService.createMarketingMember(marketingMember);
+            }
+
+            case CANDIDATE -> {
+                if (candidateRequest == null) {
+                    return ResponseEntity.badRequest().body("CANDIDATE must include valid marketingMemberId.");
+                }
+
+                MarketingMember member = marketingMemberService.getMarketingMemberById(candidateRequest.getMarketingMemberId());
+                if (member == null) {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Marketing Member not found.");
+                }
+
+                Candidate candidate = new Candidate();
+                candidate.setUser(savedUser);
+                candidate.setMarketingMember(member);
+                candidateService.createCandidate(candidate);
+            }
+
+            default -> {
+                return ResponseEntity.badRequest().body("Invalid role specified.");
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully");
+    }
+
+//
 //    @Override
 //    public ResponseEntity<?> createUserByAdmin(CreateUserRequestDto createUserRequest) {
+//    try
+//
+//    {
 //        UserRequestDto userRequest = createUserRequest.getUserRequest();
 //        CandidateRequestDto candidateRequest = createUserRequest.getCandidateRequest();
 //        User user = new User();
@@ -137,10 +216,17 @@ public class UserServiceImpl implements UserService {
 //        user.setRoles(userRequest.getRole());
 //        user.setMobileNumber(userRequest.getMobileNumber());
 //
-//        String subject = "Welcome to the ATS System";
-//        String text = "Hello " + user.getFirstName() + ",\n\nYou have been successfully registered as a candidate.";
-//        emailService.sendEmailToCandidate(user.getMail(), userRequest.getPassword(), subject, text);
-//
+////        String subject = "Welcome to the ATS System";
+////        String text = "Hello " + user.getFirstName() + ",\n\nYou have been successfully registered as a candidate.";
+////        emailService.sendEmailToCandidate(user.getMail(), userRequest.getPassword(), subject, text);
+//////
+////          try {
+////        String subject = "Welcome to the ATS System";
+////        String text = "Hello " + user.getFirstName() + ",\n\nYou have been successfully registered.";
+////        emailService.sendEmailToCandidate(user.getMail(), userRequest.getPassword(), subject, text);
+////          } catch (Exception e) {
+////        log.warn(" Failed to send email: {}", e.getMessage());
+////    }
 //        User savedUser = null;
 //        boolean userCreated = false;
 //
@@ -183,109 +269,127 @@ public class UserServiceImpl implements UserService {
 //            log.info("created a new user");
 //            return ResponseEntity.status(HttpStatus.OK).body("User created successfully");
 //        } else {
-//        	  log.error("User creation failed",HttpStatus.INTERNAL_SERVER_ERROR);
+//        	  //log.error("User creation failed",HttpStatus.INTERNAL_SERVER_ERROR);
+//            log.error("User creation failed");
+//
 //            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("User creation failed.");
 //        }
+//    } catch (Exception e) {
+//        log.error(" Unexpected error during user creation", e);
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body("Unexpected error: " + e.getMessage());
+//        }
 //
+////    }
 //
-//    }
-
-    @Override
-    public ResponseEntity<?> createUserByAdmin(CreateUserRequestDto createUserRequest) {
-        try {
-            UserRequestDto userRequest = createUserRequest.getUserRequest();
-            CandidateRequestDto candidateRequest = createUserRequest.getCandidateRequest();
-            JobApplicationsRequestDto jobRequest = createUserRequest.getJobApplicationRequest();
-
-            if (userRequest == null || userRequest.getRole() == null) {
-                return ResponseEntity.badRequest().body("Missing userRequest or role.");
-            }
-
-            //  Create base User
-            User user = new User();
-            user.setFirstName(userRequest.getFirstName());
-            user.setLastName(userRequest.getLastName());
-            user.setMail(userRequest.getMail());
-            user.setMobileNumber(userRequest.getMobileNumber());
-            user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-            user.setRoles(userRequest.getRole());
-
-            User savedUser = userRepo.save(user);
-
-            //  Optional welcome email
-            try {
-                String subject = "Welcome to the ATS System";
-                String text = "Hello " + user.getFirstName() + ",\n\nYou have been successfully registered.";
-                emailService.sendEmailToCandidate(user.getMail(), userRequest.getPassword(), subject, text);
-            } catch (Exception e) {
-                log.warn(" Failed to send email: {}", e.getMessage());
-            }
-
-//            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//            boolean matches = encoder.matches(userRequest.getPassword(), savedUser.getPassword());
-//            if (matches) {
-//                log.info("Password matches for user: {}", user.getMail());
-//            } else {
-//                log.error("Password does not match for user: {}", user.getMail());
+//    @Override
+//    public ResponseEntity<?> createUserByAdmin(CreateUserRequestDto createUserRequest) {
+//
+//            UserRequestDto userRequest = createUserRequest.getUserRequest();
+//            CandidateRequestDto candidateRequest = createUserRequest.getCandidateRequest();
+//            JobApplicationsRequestDto jobRequest = createUserRequest.getJobApplicationRequest();
+//
+//            if (userRequest == null || userRequest.getRole() == null) {
+//                return ResponseEntity.badRequest().body("Missing userRequest or role.");
 //            }
-
-            //  Role handling
-            switch (user.getRoles()) {
-                case ADMIN -> {
-                    if (candidateRequest != null || jobRequest != null) {
-                        return ResponseEntity.badRequest().body("ADMIN should not contain candidate/job data.");
-                    }
-                    Admin admin = new Admin();
-                    admin.setUser(savedUser);
-                    adminService.createAdmin(admin);
-                    log.info(" Created new ADMIN");
-                }
-
-                case MARKETING -> {
-                    if (candidateRequest != null) {
-                        return ResponseEntity.badRequest().body("MARKETING should not contain candidateRequest.");
-                    }
-                    MarketingMember marketingMember = new MarketingMember();
-                    marketingMember.setUser(savedUser);
-                    marketingMemberService.createMarketingMember(marketingMember);
-                    log.info(" Created new MARKETING MEMBER");
-                }
-
-                case CANDIDATE -> {
-                    if (candidateRequest == null) {
-                        return ResponseEntity.badRequest().body("CANDIDATE must include valid marketingMemberId.");
-                    }
-
-                    MarketingMember member = marketingMemberService.getMarketingMemberById(candidateRequest.getMarketingMemberId());
-                    if (member == null) {
-                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Marketing Member not found.");
-                    }
-
-                    Candidate candidate = new Candidate();
-                    candidate.setUser(savedUser);
-                    candidate.setMarketingMember(member);
-                    candidateService.createCandidate(candidate);
-
-                    // (Optional) handle jobRequest here
-                    log.info(" Created new CANDIDATE");
-                }
-
-                default -> {
-                    return ResponseEntity.badRequest().body(" Invalid role specified.");
-                }
-            }
-
-            //  Save user last
-         //   userRepo.save(user);
-            log.info(" Final user record saved: {}", user.getMail());
-
-            return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully");
-        } catch (Exception e) {
-            log.error(" Unexpected error during user creation", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Unexpected error: " + e.getMessage());
-        }
-    }
+//
+//            if (userRepo.existsByMail(userRequest.getMail())) {
+//                throw new EmailAlreadyExistsException("Email already exists: " + userRequest.getMail());
+//            }
+//
+//            if (userRepo.existsByMobileNumber(userRequest.getMobileNumber())) {
+//                throw new MobileNumberAlreadyExistsException("Mobile number already exists: " + userRequest.getMobileNumber());
+//            }
+//
+//            //  Create base User
+//            User user = new User();
+//            user.setFirstName(userRequest.getFirstName());
+//            user.setLastName(userRequest.getLastName());
+//            user.setMail(userRequest.getMail());
+//            user.setMobileNumber(userRequest.getMobileNumber());
+//            user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+//            user.setRoles(userRequest.getRole());
+//
+//            User savedUser = userRepo.save(user);
+//
+//
+//            //  Optional welcome email
+//          try {
+//                String subject = "Welcome to the ATS System";
+//                String text = "Hello " + user.getFirstName() + ",\n\nYou have been successfully registered.";
+//                emailService.sendEmailToCandidate(user.getMail(), userRequest.getPassword(), subject, text);
+//            } catch (Exception e) {
+//                log.warn(" Failed to send email: {}", e.getMessage());
+//            }
+//
+////            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+////            boolean matches = encoder.matches(userRequest.getPassword(), savedUser.getPassword());
+////            if (matches) {
+////                log.info("Password matches for user: {}", user.getMail());
+////            } else {
+////                log.error("Password does not match for user: {}", user.getMail());
+////            }
+//
+//            //  Role handling
+//
+//
+//
+//            switch (user.getRoles()) {
+//                case ADMIN -> {
+//                    if (candidateRequest != null || jobRequest != null) {
+//                        return ResponseEntity.badRequest().body("ADMIN should not contain candidate/job data.");
+//                    }
+//                    Admin admin = new Admin();
+//                    admin.setUser(savedUser);
+//                    adminService.createAdmin(admin);
+//                    log.info(" Created new ADMIN");
+//                }
+//
+//                case MARKETING -> {
+//                    if (candidateRequest != null) {
+//                        return ResponseEntity.badRequest().body("MARKETING should not contain candidateRequest.");
+//                    }
+//                    MarketingMember marketingMember = new MarketingMember();
+//                    marketingMember.setUser(savedUser);
+//                    marketingMemberService.createMarketingMember(marketingMember);
+//                    log.info(" Created new MARKETING MEMBER");
+//                }
+//
+//                case CANDIDATE -> {
+//                    if (candidateRequest == null) {
+//                        return ResponseEntity.badRequest().body("CANDIDATE must include valid marketingMemberId.");
+//                    }
+//
+//                    MarketingMember member = marketingMemberService.getMarketingMemberById(candidateRequest.getMarketingMemberId());
+//                    if (member == null) {
+//                        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Marketing Member not found.");
+//                    }
+//
+//                    Candidate candidate = new Candidate();
+//                    candidate.setUser(savedUser);
+//                    candidate.setMarketingMember(member);
+//                    candidateService.createCandidate(candidate);
+//
+//                    // (Optional) handle jobRequest here
+//                    log.info(" Created new CANDIDATE");
+//                }
+//
+//                default -> {
+//                    return ResponseEntity.badRequest().body(" Invalid role specified.");
+//                }
+//            }
+//
+//            //  Save user last
+//         //   userRepo.save(user);
+//            log.info(" Final user record saved: {}", user.getMail());
+//
+//            return ResponseEntity.status(HttpStatus.CREATED).body("User created successfully");
+////         catch (Exception e) {
+////            log.error(" Unexpected error during user creation", e);
+////            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+////                    .body("Unexpected error: " + e.getMessage());
+////        }
+//    }
 
 
     @Override

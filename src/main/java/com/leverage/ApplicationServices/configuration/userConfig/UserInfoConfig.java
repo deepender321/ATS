@@ -21,10 +21,17 @@ public class UserInfoConfig implements UserDetails {
         return List.of(new SimpleGrantedAuthority(user.getRoles().name()));
     }
 
+//    @Override
+//    public String getPassword() {
+//        return user.getPassword();
+//    }
+
     @Override
     public String getPassword() {
+        System.out.println(" Returning password to Spring Security: " + user.getPassword());
         return user.getPassword();
     }
+
 
     @Override
     public String getUsername() {

@@ -16,11 +16,28 @@ public class UserManagerConfig implements UserDetailsService {
     }
 
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepo
-                .findByMail(username)
-                .map(UserInfoConfig::new)
-                .orElseThrow(()-> new UsernameNotFoundException("User with emailId: "+username+" not found"));
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        return userRepo
+//                .findByMail(username)
+//                .map(UserInfoConfig::new)
+//                .orElseThrow(()-> new UsernameNotFoundException("User with emailId: "+username+" not found"));
+
+        @Override
+        public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+            System.out.println("🔍 Loading user from DB for email: " + username);
+
+            return userRepo
+                    .findByMail(username)
+                    .map(user -> {
+                        System.out.println(" User found. Password (from DB): " + user.getPassword());
+                        return new UserInfoConfig(user);
+                    })
+                    .orElseThrow(() -> {
+                        System.out.println(" User not found for email: " + username);
+                        return new UsernameNotFoundException("User with emailId: " + username + " not found");
+                    });
+        }
+
     }
-}
+
