@@ -42,4 +42,6 @@ UserService {
 
 	ResponseEntity<?> getJobDetailsByMember(int userId);
 
-}
+	ResponseEntity<?> assignMarketingMemberToCandidate(int candidateUserId, int marketingMemberUserId);
+
+};

@@ -4,7 +4,11 @@ import com.leverage.ApplicationServices.DTO.CreateUserRequestDto;
 import com.leverage.ApplicationServices.enums.Roles;
 import com.leverage.ApplicationServices.Exception.Exception.EmailAlreadyExistsException;
 import com.leverage.ApplicationServices.Exception.Exception.MobileNumberAlreadyExistsException;
+import com.leverage.ApplicationServices.model.Candidate;
+import com.leverage.ApplicationServices.model.MarketingMember;
 import com.leverage.ApplicationServices.model.User;
+import com.leverage.ApplicationServices.service.CandidateService;
+import com.leverage.ApplicationServices.service.MarketingMemberService;
 import com.leverage.ApplicationServices.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +26,14 @@ public class UserController {
 
 	private final UserService userService;
 
-	public UserController(UserService userService) {
+//	private MarketingMemberService marketingMemberService;
+//	private CandidateService candidateService;
+	public UserController(UserService userService) //,MarketingMemberService marketingMemberService,
+						 // CandidateService candidateService)
+	{
 		this.userService = userService;
+	//	this.marketingMemberService = marketingMemberService;
+	//	this.candidateService = candidateService;
 	}
 
 //	@PostMapping("/create")
@@ -74,6 +84,67 @@ public class UserController {
 		}
 	}
 
+	@PutMapping("/assign-marketing/{candidateUserId}/to/{marketingMemberUserId}")
+	public ResponseEntity<?> assignMarketingMemberToCandidate(
+			@PathVariable int candidateUserId,
+			@PathVariable int marketingMemberUserId) {
+		return userService.assignMarketingMemberToCandidate(candidateUserId, marketingMemberUserId);
+	}
+
+//	@PutMapping("/assign-marketing/{candidateUserId}/to/{marketingMemberUserId}")
+//	public ResponseEntity<?> assignMarketingMemberToCandidate(
+//			@PathVariable int candidateUserId,
+//			@PathVariable int marketingMemberUserId) {
+//
+//		// This clearly shows you're passing user IDs
+//		Candidate candidate = candidateService.getCandidateByUserId(candidateUserId);
+//		MarketingMember marketingMember = marketingMemberService.getMarketingMemberByUserId(marketingMemberUserId);
+//
+//		if (candidate == null || marketingMember == null) {
+//			return ResponseEntity.badRequest().body("Invalid candidate or marketing member.");
+//		}
+//
+//		if (candidate.getMarketingMember() != null) {
+//			return ResponseEntity.status(409).body("Candidate is already assigned to a marketing member.");
+//		}
+//
+//		candidate.setMarketingMember(marketingMember);
+//		candidateService.saveCandidate(candidate);
+//
+//		return ResponseEntity.ok("Marketing member assigned to candidate.");
+//	}
+
+//	@PutMapping("/assign-marketing/{candidateUserId}/to/{marketingMemberUserId}")
+//	public ResponseEntity<?> assignMarketingMemberToCandidate(
+//			@PathVariable int candidateUserId,
+//			@PathVariable int marketingMemberUserId) {
+//
+//		User candidateUser = userService.getUser(candidateUserId);
+//		if (candidateUser == null ) {
+//			return ResponseEntity.badRequest().body("Invalid candidate user.");
+//		}
+//
+//		User marketingUser = userService.getUser(marketingMemberUserId);
+//		if (marketingUser == null) {
+//			return ResponseEntity.badRequest().body("Invalid marketing member user.");
+//		}
+//
+//		MarketingMember marketingMember = marketingMemberService.getMarketingMemberByUserId(marketingMemberUserId);
+//		if (marketingMember == null) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Marketing member not found.");
+//		}
+//
+//		Candidate candidate = candidateService.getCandidateByUserId(candidateUserId);
+//		if (candidate == null) {
+//			candidate = new Candidate();
+//			candidate.setUser(candidateUser);
+//		}
+//
+//		candidate.setMarketingMember(marketingMember);
+//		candidateService.saveCandidate(candidate);
+//
+//		return ResponseEntity.ok("Marketing member assigned to candidate successfully.");
+//	}
 
 
 

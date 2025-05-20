@@ -23,7 +23,7 @@ public class EmailService {
 
 	public void sendEmail(String to, String subject, String text) {
 		SimpleMailMessage message = new SimpleMailMessage();
-		message.setFrom("deependhar2deepu@gmail.com");
+		message.setFrom("deepndhar2deepu@gmail.com");
 		message.setTo(to);
 		message.setSubject(subject);
 		message.setText(text);
@@ -56,13 +56,13 @@ public class EmailService {
 		System.out.println("sendEmailForJobDetails email sent");
 		String subject = "Weekly Job Applications Report";
 		String text = "Attached is the weekly report of job applications.";
-		sendEmailWithAttachment("deependhar2deepu@gmail.com", subject, text, pdfFile);
+		sendEmailWithAttachment("deepndhar2deepu@gmail.com", subject, text, pdfFile);
 	}
 
 	public void sendEmailOfNewUsers(File pdfFile) {
 		System.out.println("sendEmailOfNewUsers email sent");
 		String subject = "Weekly Registrations Report";
 		String text = "Attached is the details of new registrations.";
-		sendEmailWithAttachment("deependhar2deepu@gmail.com", subject, text, pdfFile);
+		sendEmailWithAttachment("deepndhar2deepu@gmail.com", subject, text, pdfFile);
 	}
 }

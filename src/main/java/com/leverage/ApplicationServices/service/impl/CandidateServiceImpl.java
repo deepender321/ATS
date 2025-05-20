@@ -59,6 +59,11 @@ public class CandidateServiceImpl implements CandidateService {
 		return candidateRepo.save(candidate);
 	}
 
+	public Candidate saveCandidate(Candidate candidate) {
+		return candidateRepo.save(candidate);
+	}
+
+
 	@Override
 	@Transactional
 	public Candidate updateCandidate(Candidate candidate) {

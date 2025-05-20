@@ -75,6 +75,8 @@ public class UserServiceImpl implements UserService {
         return userRepo.save(user);
     }
 
+
+
     @Override
     public User updateUser(User user) {
         if (userRepo.findById(user.getId()).isEmpty()) {
@@ -123,6 +125,37 @@ public class UserServiceImpl implements UserService {
     public User getUserById(Integer userId) {
         return userRepo.findById(userId).orElse(null);
     }
+
+    @Override
+    public ResponseEntity<?> assignMarketingMemberToCandidate(int candidateUserId, int marketingMemberUserId) {
+        User candidateUser = getUser(candidateUserId);
+        if (candidateUser == null || candidateUser.getRoles() != Roles.CANDIDATE) {
+            return ResponseEntity.badRequest().body("Invalid candidate user.");
+        }
+
+        User marketingUser = getUser(marketingMemberUserId);
+        if (marketingUser == null || marketingUser.getRoles() != Roles.MARKETING) {
+            return ResponseEntity.badRequest().body("Invalid marketing member user.");
+        }
+
+
+        MarketingMember marketingMember = marketingMemberService.getMarketingMemberByUserId(marketingMemberUserId);
+        if (marketingMember == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Marketing member not found.");
+        }
+
+        Candidate candidate = candidateService.getCandidateByUserId(candidateUserId);
+        if (candidate == null) {
+            candidate = new Candidate();
+            candidate.setUser(candidateUser);
+        }
+
+        candidate.setMarketingMember(marketingMember);
+        candidateService.saveCandidate(candidate);
+
+        return ResponseEntity.ok("Marketing member assigned to candidate successfully.");
+    }
+
 
     @Override
     public ResponseEntity<?> createUserByAdmin(CreateUserRequestDto createUserRequest) {
@@ -487,6 +520,7 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
+
 
     @Override
     public ResponseEntity<?> deleteUserByAdmin(Integer userId) {

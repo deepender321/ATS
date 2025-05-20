@@ -3,7 +3,7 @@ package com.leverage.ApplicationServices.controller;
 import java.util.List;
 
 import com.leverage.ApplicationServices.DTO.InterviewDetailsRequestDto;
-import com.leverage.ApplicationServices.model.InterviewDetails;
+import com.leverage.ApplicationServices.model.*;
 import com.leverage.ApplicationServices.service.InterviewDetailsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,10 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.leverage.ApplicationServices.DTO.CreateUserRequestDto;
 import com.leverage.ApplicationServices.DTO.StatusUpdateDto;
-import com.leverage.ApplicationServices.model.Candidate;
-import com.leverage.ApplicationServices.model.JobApplications;
-import com.leverage.ApplicationServices.model.MarketingMember;
-import com.leverage.ApplicationServices.model.Resume;
 import com.leverage.ApplicationServices.service.CandidateService;
 import com.leverage.ApplicationServices.service.JobApplicationsService;
 import com.leverage.ApplicationServices.service.MarketingMemberService;
@@ -81,12 +77,29 @@ public class MarketingMemberController {
 		return marketingMemberService.getMemberDetailsByUserId(userId);
 
 	}
+
+//	@GetMapping("/allUsers")
+//	public List<User> getAllUsers() {
+//	//	log.info("get All users admin");
+//		return marketingMemberService.getAllUsers();
+//	}
 	@GetMapping("/candidate/{userId}")
 	public Candidate getCandidateByUserId(@PathVariable int userId) {
 		return candidateService.getCandidateByUserId(userId);
 	}
 
-	
+	@GetMapping("/allUsers")
+	public List<MarketingMember> getAllUsers() {
+		//log.info("get All users admin");
+		return marketingMemberService.getAllMarketingMembers();
+	}
+
+	@GetMapping("/allUses")
+	public List<Candidate> getAlUsers() {
+		//log.info("get All users admin");
+		return candidateService.getAllCandidates();
+	}
+
 	@GetMapping("/{userId}")
 	public MarketingMember getMemberByUserId(@PathVariable int userId) {
 		return marketingMemberService.getMarketingMemberByUserId(userId);

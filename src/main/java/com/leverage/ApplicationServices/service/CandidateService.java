@@ -44,4 +44,5 @@ public interface CandidateService {
 
 	ResponseEntity<List<String>> getAllResumesByCandidateIdBylinks(int candidateId);
 
+	Candidate saveCandidate(Candidate candidate);
 }
