@@ -1,6 +1,7 @@
 # Use Amazon Corretto 17 for building the project
-FROM amazoncorretto:17-alpine AS build
+#FROM amazoncorretto:17-alpine AS build
 
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:17 AS build
 # Install Maven
 RUN apk add --no-cache maven
 
@@ -17,7 +18,9 @@ RUN mvn clean package -DskipTests
 # Use a lightweight JRE image to run the application
 #FROM amazoncorretto:17-alpine
 
-FROM public.ecr.aws/amazoncorretto/amazoncorretto:17-alpine
+#FROM public.ecr.aws/amazoncorretto/amazoncorretto:17-alpine
+
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:17
 
 # Set the working directory
 WORKDIR /app
