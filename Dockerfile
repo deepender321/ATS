@@ -1,7 +1,7 @@
 # Use Amazon Corretto 17 for building the project
-#FROM amazoncorretto:17-alpine AS build
+FROM amazoncorretto:17-alpine AS build
 
-FROM public.ecr.aws/amazoncorretto/amazoncorretto:17 AS build
+#FROM public.ecr.aws/amazoncorretto/amazoncorretto:17 AS build
 # Install Maven
 RUN apk add --no-cache maven
 
@@ -16,17 +16,17 @@ COPY src /app/src
 RUN mvn clean package -DskipTests
 
 # Use a lightweight JRE image to run the application
-#FROM amazoncorretto:17-alpine
+FROM amazoncorretto:17-alpine
 
 #FROM public.ecr.aws/amazoncorretto/amazoncorretto:17-alpine
 
-FROM public.ecr.aws/amazoncorretto/amazoncorretto:17
+#FROM public.ecr.aws/amazoncorretto/amazoncorretto:17
 
 # Set the working directory
 WORKDIR /app
 
-# Copy the .jar file from the build stage to the current working directory
-COPY --from=build /app/target/ApplicationServices-0.0.1-SNAPSHOT.jar /app/ApplicationServices-0.0.1-SNAPSHOT.jar
+ Copy the .jar file from the build stage to the current working directory
+#COPY --from=build /app/target/ApplicationServices-0.0.1-SNAPSHOT.jar /app/ApplicationServices-0.0.1-SNAPSHOT.jar
 
 # Expose the port the application will run on
 EXPOSE 8080
