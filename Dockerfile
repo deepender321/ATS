@@ -15,7 +15,9 @@ COPY src /app/src
 RUN mvn clean package -DskipTests
 
 # Use a lightweight JRE image to run the application
-FROM amazoncorretto:17-alpine
+#FROM amazoncorretto:17-alpine
+
+FROM public.ecr.aws/amazoncorretto/amazoncorretto:17-alpine
 
 # Set the working directory
 WORKDIR /app
