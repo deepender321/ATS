@@ -25,8 +25,8 @@ FROM amazoncorretto:17-alpine
 # Set the working directory
 WORKDIR /app
 
- Copy the .jar file from the build stage to the current working directory
-#COPY --from=build /app/target/ApplicationServices-0.0.1-SNAPSHOT.jar /app/ApplicationServices-0.0.1-SNAPSHOT.jar
+ #Copy the .jar file from the build stage to the current working directory
+COPY --from=build /app/target/ApplicationServices-0.0.1-SNAPSHOT.jar /app/ApplicationServices-0.0.1-SNAPSHOT.jar
 
 # Expose the port the application will run on
 EXPOSE 8080

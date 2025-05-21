@@ -39,15 +39,15 @@ public class UserRequestDto {
 //    @Pattern(regexp = "^[A-Za-z]+$", message = "First name must contain letters only")
 
 
-    @NotNull(message = "First name is required")
-    @Pattern(regexp = "^[A-Za-z]+$", message = "Last name must contain letters only")
+    @NotBlank(message = "First name is required")
+    @Pattern(regexp = "^[A-Za-z]+$", message = "First name must contain letters only")
     private String firstName;
 
-    @NotNull(message = "Last name is required")
+    @NotBlank(message = "Last name is required")
     @Pattern(regexp = "^[A-Za-z]+$", message = "Last name must contain letters only")
     private String lastName;
 
-    @NotNull(message = "Email is required")
+    @NotBlank(message = "Email is required")
     @Pattern(
             regexp = "^[A-Za-z0 -9._%+-]+@[A-Za-z0-9.-]+\\.com$",
             message = "Email must be valid and end with .com"
