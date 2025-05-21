@@ -1,167 +1,52 @@
-2025-05-20 13:45:03,338 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :Starting ApplicationServicesApplication using Java 17.0.12 with PID 81600 (C:\Users\deepe\IdeaProjects\ATSLT\target\classes started by deepe in C:\Users\deepe\IdeaProjects\ATSLT)
-2025-05-20 13:45:03,345 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :No active profile set, falling back to 1 default profile: "default"
-2025-05-20 13:45:04,338 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate :Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-20 13:45:04,430 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate :Finished Spring Data repository scanning in 79 ms. Found 7 JPA repository interfaces.
-2025-05-20 13:45:05,420 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer :Tomcat initialized with port 8080 (http)
-2025-05-20 13:45:05,431 INFO  [main] org.apache.catalina.core.StandardService :Starting service [Tomcat]
-2025-05-20 13:45:05,431 INFO  [main] org.apache.catalina.core.StandardEngine :Starting Servlet engine: [Apache Tomcat/10.1.28]
-2025-05-20 13:45:05,501 INFO  [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] :Initializing Spring embedded WebApplicationContext
-2025-05-20 13:45:05,501 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext :Root WebApplicationContext: initialization completed in 2099 ms
-2025-05-20 13:45:05,719 INFO  [main] org.hibernate.jpa.internal.util.LogHelper :HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-20 13:45:05,821 INFO  [main] org.hibernate.Version :HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-05-20 13:45:05,883 INFO  [main] org.hibernate.cache.internal.RegionFactoryInitiator :HHH000026: Second-level cache disabled
-2025-05-20 13:45:06,359 INFO  [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo :No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-20 13:45:06,384 INFO  [main] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Starting...
-2025-05-20 13:45:06,959 INFO  [main] com.zaxxer.hikari.pool.HikariPool :HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5eb2972f
-2025-05-20 13:45:06,963 INFO  [main] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Start completed.
-2025-05-20 13:45:08,047 INFO  [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator :HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-05-20 13:45:08,798 INFO  [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean :Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-05-20 13:45:09,282 INFO  [main] org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer :Global AuthenticationManager configured with UserDetailsService bean with name userManagerConfig
-2025-05-20 13:45:09,548 WARN  [main] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration :spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-05-20 13:45:09,996 DEBUG [main] org.springframework.security.web.DefaultSecurityFilterChain :Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAccessTokenFilter, BearerTokenAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
-2025-05-20 13:45:10,324 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer :Tomcat started on port 8080 (http) with context path '/'
-2025-05-20 13:45:10,337 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :Started ApplicationServicesApplication in 7.495 seconds (process running for 8.01)
-2025-05-20 13:45:20,993 INFO  [http-nio-8080-exec-2] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] :Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-05-20 13:45:21,037 DEBUG [http-nio-8080-exec-2] org.springframework.security.web.FilterChainProxy :Securing POST /api/auth
-2025-05-20 13:45:21,049 INFO  [http-nio-8080-exec-2] com.leverage.ApplicationServices.configuration.jwtConfig.JwtAccessTokenFilter :[JwtAccessTokenFilter:doFilterInternal] :: Started 
-2025-05-20 13:45:21,050 INFO  [http-nio-8080-exec-2] com.leverage.ApplicationServices.configuration.jwtConfig.JwtAccessTokenFilter :[JwtAccessTokenFilter:doFilterInternal] Filtering the Http Request: /api/auth
-2025-05-20 13:45:21,055 DEBUG [http-nio-8080-exec-2] org.springframework.security.web.authentication.AnonymousAuthenticationFilter :Set SecurityContextHolder to anonymous SecurityContext
-2025-05-20 13:45:21,055 DEBUG [http-nio-8080-exec-2] org.springframework.security.web.session.SessionManagementFilter :Request requested invalid session id 9038B2FE879739A7F1EEA8C340320B13
-2025-05-20 13:45:21,057 DEBUG [http-nio-8080-exec-2] org.springframework.security.web.FilterChainProxy :Secured POST /api/auth
-2025-05-20 13:45:21,276 INFO  [http-nio-8080-exec-2] com.leverage.ApplicationServices.controller.AuthenticationController :Attempting to sign in user with email: abc123@ats.com
-2025-05-20 13:45:21,571 WARN  [http-nio-8080-exec-2] org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder :Encoded password does not look like BCrypt
-2025-05-20 13:45:21,571 DEBUG [http-nio-8080-exec-2] org.springframework.security.authentication.dao.DaoAuthenticationProvider :Failed to authenticate since password does not match stored value
-2025-05-20 13:45:21,579 ERROR [http-nio-8080-exec-2] com.leverage.ApplicationServices.controller.AuthenticationController :Authentication failed: Bad credentials
-2025-05-20 13:45:41,252 DEBUG [http-nio-8080-exec-3] org.springframework.security.web.FilterChainProxy :Securing POST /api/auth
-2025-05-20 13:45:41,252 INFO  [http-nio-8080-exec-3] com.leverage.ApplicationServices.configuration.jwtConfig.JwtAccessTokenFilter :[JwtAccessTokenFilter:doFilterInternal] :: Started 
-2025-05-20 13:45:41,252 INFO  [http-nio-8080-exec-3] com.leverage.ApplicationServices.configuration.jwtConfig.JwtAccessTokenFilter :[JwtAccessTokenFilter:doFilterInternal] Filtering the Http Request: /api/auth
-2025-05-20 13:45:41,252 DEBUG [http-nio-8080-exec-3] org.springframework.security.web.authentication.AnonymousAuthenticationFilter :Set SecurityContextHolder to anonymous SecurityContext
-2025-05-20 13:45:41,252 DEBUG [http-nio-8080-exec-3] org.springframework.security.web.session.SessionManagementFilter :Request requested invalid session id 9038B2FE879739A7F1EEA8C340320B13
-2025-05-20 13:45:41,252 DEBUG [http-nio-8080-exec-3] org.springframework.security.web.FilterChainProxy :Secured POST /api/auth
-2025-05-20 13:45:41,253 INFO  [http-nio-8080-exec-3] com.leverage.ApplicationServices.controller.AuthenticationController :Attempting to sign in user with email: alx@ats.com
-2025-05-20 13:45:41,338 DEBUG [http-nio-8080-exec-3] org.springframework.security.authentication.dao.DaoAuthenticationProvider :Authenticated user
-2025-05-20 13:45:41,339 INFO  [http-nio-8080-exec-3] com.leverage.ApplicationServices.controller.AuthenticationController :Authentication successful for user: alx@ats.com
-2025-05-20 13:45:41,353 INFO  [http-nio-8080-exec-3] com.leverage.ApplicationServices.configuration.jwtConfig.JwtTokenGenerator :[JwtTokenGenerator:generateAccessToken] Token Creation Started for:
-2025-05-20 13:45:41,356 INFO  [http-nio-8080-exec-3] com.leverage.ApplicationServices.configuration.jwtConfig.JwtTokenGenerator :User info : User(id=39, firstName=, lastName=Admin, mail=alx@ats.com, password=$2a$10$LndBWq6wBMLRoySibxGKdukylP9jgEbS2yf11zwVFAnysPgofLt.e, mobileNumber=9116203210, roles=ADMIN, createdDate=2025-05-14T10:50:52.478911, updatedDate=2025-05-14T10:50:52.478911)
-2025-05-20 13:45:41,356 INFO  [http-nio-8080-exec-3] com.leverage.ApplicationServices.configuration.jwtConfig.JwtTokenGenerator :Role for the user alx@ats.com is : ADMIN
-2025-05-20 13:45:41,356 INFO  [http-nio-8080-exec-3] com.leverage.ApplicationServices.configuration.jwtConfig.JwtTokenGenerator :Role for the user alx@ats.com is : [ROLE_ADMIN]
-2025-05-20 13:45:41,421 INFO  [http-nio-8080-exec-3] com.leverage.ApplicationServices.service.impl.AuthServiceImpl :[AuthService:userSignInAuth] Access token for user :  at time 2025-05-20T17:45:41.421923700Z, has been generated
-2025-05-20 13:47:40,093 DEBUG [http-nio-8080-exec-6] org.springframework.security.web.FilterChainProxy :Securing POST /user/create
-2025-05-20 13:47:40,094 INFO  [http-nio-8080-exec-6] com.leverage.ApplicationServices.configuration.jwtConfig.JwtAccessTokenFilter :[JwtAccessTokenFilter:doFilterInternal] :: Started 
-2025-05-20 13:47:40,095 INFO  [http-nio-8080-exec-6] com.leverage.ApplicationServices.configuration.jwtConfig.JwtAccessTokenFilter :[JwtAccessTokenFilter:doFilterInternal] Filtering the Http Request: /user/create
-2025-05-20 13:47:40,102 DEBUG [http-nio-8080-exec-6] org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider :Authenticated token
-2025-05-20 13:47:40,102 DEBUG [http-nio-8080-exec-6] org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter :Set SecurityContextHolder to JwtAuthenticationToken [Principal=org.springframework.security.oauth2.jwt.Jwt@e77ed4c6, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_ADMIN]]
-2025-05-20 13:47:40,103 DEBUG [http-nio-8080-exec-6] org.springframework.security.web.FilterChainProxy :Secured POST /user/create
-2025-05-20 13:47:41,117 WARN  [http-nio-8080-exec-6] com.leverage.ApplicationServices.service.impl.UserServiceImpl :Failed to send email: Authentication failed
-2025-05-20 13:47:41,119 INFO  [http-nio-8080-exec-6] com.leverage.ApplicationServices.controller.UserController : User created successfully: deepndhar2deepu@gmail.com
-2025-05-20 13:57:53,493 INFO  [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean :Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-05-20 13:57:53,496 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Shutdown initiated...
-2025-05-20 13:57:53,645 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Shutdown completed.
-2025-05-20 13:57:57,480 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :Starting ApplicationServicesApplication using Java 17.0.12 with PID 81028 (C:\Users\deepe\IdeaProjects\ATSLT\target\classes started by deepe in C:\Users\deepe\IdeaProjects\ATSLT)
-2025-05-20 13:57:57,482 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :No active profile set, falling back to 1 default profile: "default"
-2025-05-20 13:57:58,514 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate :Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-20 13:57:58,605 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate :Finished Spring Data repository scanning in 79 ms. Found 7 JPA repository interfaces.
-2025-05-20 13:57:59,653 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer :Tomcat initialized with port 8080 (http)
-2025-05-20 13:57:59,671 INFO  [main] org.apache.catalina.core.StandardService :Starting service [Tomcat]
-2025-05-20 13:57:59,671 INFO  [main] org.apache.catalina.core.StandardEngine :Starting Servlet engine: [Apache Tomcat/10.1.28]
-2025-05-20 13:57:59,796 INFO  [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] :Initializing Spring embedded WebApplicationContext
-2025-05-20 13:57:59,797 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext :Root WebApplicationContext: initialization completed in 2258 ms
-2025-05-20 13:58:00,056 INFO  [main] org.hibernate.jpa.internal.util.LogHelper :HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-20 13:58:00,179 INFO  [main] org.hibernate.Version :HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-05-20 13:58:00,243 INFO  [main] org.hibernate.cache.internal.RegionFactoryInitiator :HHH000026: Second-level cache disabled
-2025-05-20 13:58:00,748 INFO  [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo :No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-20 13:58:00,792 INFO  [main] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Starting...
-2025-05-20 13:58:01,457 INFO  [main] com.zaxxer.hikari.pool.HikariPool :HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7ee2423
-2025-05-20 13:58:01,459 INFO  [main] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Start completed.
-2025-05-20 13:58:02,624 INFO  [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator :HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-05-20 13:58:03,222 INFO  [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean :Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-05-20 13:58:03,741 INFO  [main] org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer :Global AuthenticationManager configured with UserDetailsService bean with name userManagerConfig
-2025-05-20 13:58:03,991 WARN  [main] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration :spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-05-20 13:58:04,434 DEBUG [main] org.springframework.security.web.DefaultSecurityFilterChain :Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAccessTokenFilter, BearerTokenAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
-2025-05-20 13:58:04,712 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer :Tomcat started on port 8080 (http) with context path '/'
-2025-05-20 13:58:04,724 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :Started ApplicationServicesApplication in 7.733 seconds (process running for 8.139)
-2025-05-20 13:58:30,947 INFO  [http-nio-8080-exec-2] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] :Initializing Spring DispatcherServlet 'dispatcherServlet'
-2025-05-20 13:58:30,966 DEBUG [http-nio-8080-exec-2] org.springframework.security.web.FilterChainProxy :Securing POST /api/auth
-2025-05-20 13:58:30,973 INFO  [http-nio-8080-exec-2] com.leverage.ApplicationServices.configuration.jwtConfig.JwtAccessTokenFilter :[JwtAccessTokenFilter:doFilterInternal] :: Started 
-2025-05-20 13:58:30,973 INFO  [http-nio-8080-exec-2] com.leverage.ApplicationServices.configuration.jwtConfig.JwtAccessTokenFilter :[JwtAccessTokenFilter:doFilterInternal] Filtering the Http Request: /api/auth
-2025-05-20 13:58:31,047 DEBUG [http-nio-8080-exec-2] org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider :Authenticated token
-2025-05-20 13:58:31,048 DEBUG [http-nio-8080-exec-2] org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter :Set SecurityContextHolder to JwtAuthenticationToken [Principal=org.springframework.security.oauth2.jwt.Jwt@e77ed4c6, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_ADMIN]]
-2025-05-20 13:58:31,051 DEBUG [http-nio-8080-exec-2] org.springframework.security.web.FilterChainProxy :Secured POST /api/auth
-2025-05-20 13:58:31,215 INFO  [http-nio-8080-exec-2] com.leverage.ApplicationServices.controller.AuthenticationController :Attempting to sign in user with email: alx@ats.com
-2025-05-20 13:58:31,672 DEBUG [http-nio-8080-exec-2] org.springframework.security.authentication.dao.DaoAuthenticationProvider :Authenticated user
-2025-05-20 13:58:31,673 INFO  [http-nio-8080-exec-2] com.leverage.ApplicationServices.controller.AuthenticationController :Authentication successful for user: alx@ats.com
-2025-05-20 13:58:31,699 INFO  [http-nio-8080-exec-2] com.leverage.ApplicationServices.configuration.jwtConfig.JwtTokenGenerator :[JwtTokenGenerator:generateAccessToken] Token Creation Started for:
-2025-05-20 13:58:31,714 INFO  [http-nio-8080-exec-2] com.leverage.ApplicationServices.configuration.jwtConfig.JwtTokenGenerator :User info : User(id=39, firstName=, lastName=Admin, mail=alx@ats.com, password=$2a$10$LndBWq6wBMLRoySibxGKdukylP9jgEbS2yf11zwVFAnysPgofLt.e, mobileNumber=9116203210, roles=ADMIN, createdDate=2025-05-14T10:50:52.478911, updatedDate=2025-05-14T10:50:52.478911)
-2025-05-20 13:58:31,715 INFO  [http-nio-8080-exec-2] com.leverage.ApplicationServices.configuration.jwtConfig.JwtTokenGenerator :Role for the user alx@ats.com is : ADMIN
-2025-05-20 13:58:31,715 INFO  [http-nio-8080-exec-2] com.leverage.ApplicationServices.configuration.jwtConfig.JwtTokenGenerator :Role for the user alx@ats.com is : [ROLE_ADMIN]
-2025-05-20 13:58:31,770 INFO  [http-nio-8080-exec-2] com.leverage.ApplicationServices.service.impl.AuthServiceImpl :[AuthService:userSignInAuth] Access token for user :  at time 2025-05-20T17:58:31.770713300Z, has been generated
-2025-05-20 13:59:34,236 DEBUG [http-nio-8080-exec-6] org.springframework.security.web.FilterChainProxy :Securing POST /user/create
-2025-05-20 13:59:34,237 INFO  [http-nio-8080-exec-6] com.leverage.ApplicationServices.configuration.jwtConfig.JwtAccessTokenFilter :[JwtAccessTokenFilter:doFilterInternal] :: Started 
-2025-05-20 13:59:34,238 INFO  [http-nio-8080-exec-6] com.leverage.ApplicationServices.configuration.jwtConfig.JwtAccessTokenFilter :[JwtAccessTokenFilter:doFilterInternal] Filtering the Http Request: /user/create
-2025-05-20 13:59:34,240 DEBUG [http-nio-8080-exec-6] org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider :Authenticated token
-2025-05-20 13:59:34,240 DEBUG [http-nio-8080-exec-6] org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter :Set SecurityContextHolder to JwtAuthenticationToken [Principal=org.springframework.security.oauth2.jwt.Jwt@7c68c889, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_ADMIN]]
-2025-05-20 13:59:34,241 DEBUG [http-nio-8080-exec-6] org.springframework.security.web.FilterChainProxy :Secured POST /user/create
-2025-05-20 13:59:34,315 WARN  [http-nio-8080-exec-6] com.leverage.ApplicationServices.controller.UserController : Email already exists: Email already exists: deependhar2deepu@gmail.com
-2025-05-20 14:00:38,367 DEBUG [http-nio-8080-exec-7] org.springframework.security.web.FilterChainProxy :Securing POST /user/create
-2025-05-20 14:00:38,367 INFO  [http-nio-8080-exec-7] com.leverage.ApplicationServices.configuration.jwtConfig.JwtAccessTokenFilter :[JwtAccessTokenFilter:doFilterInternal] :: Started 
-2025-05-20 14:00:38,367 INFO  [http-nio-8080-exec-7] com.leverage.ApplicationServices.configuration.jwtConfig.JwtAccessTokenFilter :[JwtAccessTokenFilter:doFilterInternal] Filtering the Http Request: /user/create
-2025-05-20 14:00:38,371 DEBUG [http-nio-8080-exec-7] org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider :Authenticated token
-2025-05-20 14:00:38,371 DEBUG [http-nio-8080-exec-7] org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter :Set SecurityContextHolder to JwtAuthenticationToken [Principal=org.springframework.security.oauth2.jwt.Jwt@7c68c889, Credentials=[PROTECTED], Authenticated=true, Details=WebAuthenticationDetails [RemoteIpAddress=0:0:0:0:0:0:0:1, SessionId=null], Granted Authorities=[ROLE_ADMIN]]
-2025-05-20 14:00:38,372 DEBUG [http-nio-8080-exec-7] org.springframework.security.web.FilterChainProxy :Secured POST /user/create
-2025-05-20 14:00:40,352 INFO  [http-nio-8080-exec-7] com.leverage.ApplicationServices.service.EmailService :Mail sent to drikkala@leveragesoft.com
-2025-05-20 14:00:40,354 INFO  [http-nio-8080-exec-7] com.leverage.ApplicationServices.controller.UserController : User created successfully: drikkala@leveragesoft.com
-2025-05-20 14:18:07,229 INFO  [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean :Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-05-20 14:18:07,238 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Shutdown initiated...
-2025-05-20 14:18:07,381 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Shutdown completed.
-2025-05-20 14:18:11,885 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :Starting ApplicationServicesApplication using Java 17.0.12 with PID 19308 (C:\Users\deepe\IdeaProjects\ATSLT\target\classes started by deepe in C:\Users\deepe\IdeaProjects\ATSLT)
-2025-05-20 14:18:11,887 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :No active profile set, falling back to 1 default profile: "default"
-2025-05-20 14:18:12,756 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate :Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-20 14:18:12,834 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate :Finished Spring Data repository scanning in 69 ms. Found 7 JPA repository interfaces.
-2025-05-20 14:18:13,712 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer :Tomcat initialized with port 8080 (http)
-2025-05-20 14:18:13,730 INFO  [main] org.apache.catalina.core.StandardService :Starting service [Tomcat]
-2025-05-20 14:18:13,731 INFO  [main] org.apache.catalina.core.StandardEngine :Starting Servlet engine: [Apache Tomcat/10.1.28]
-2025-05-20 14:18:13,839 INFO  [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] :Initializing Spring embedded WebApplicationContext
-2025-05-20 14:18:13,839 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext :Root WebApplicationContext: initialization completed in 1904 ms
-2025-05-20 14:18:14,035 INFO  [main] org.hibernate.jpa.internal.util.LogHelper :HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-20 14:18:14,133 INFO  [main] org.hibernate.Version :HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-05-20 14:18:14,193 INFO  [main] org.hibernate.cache.internal.RegionFactoryInitiator :HHH000026: Second-level cache disabled
-2025-05-20 14:18:14,624 INFO  [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo :No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-20 14:18:14,648 INFO  [main] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Starting...
-2025-05-20 14:18:15,226 INFO  [main] com.zaxxer.hikari.pool.HikariPool :HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@356fa0d1
-2025-05-20 14:18:15,232 INFO  [main] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Start completed.
-2025-05-20 14:18:16,445 INFO  [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator :HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-05-20 14:18:17,126 INFO  [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean :Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-05-20 14:18:17,603 INFO  [main] org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer :Global AuthenticationManager configured with UserDetailsService bean with name userManagerConfig
-2025-05-20 14:18:17,853 WARN  [main] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration :spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-05-20 14:18:18,278 DEBUG [main] org.springframework.security.web.DefaultSecurityFilterChain :Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAccessTokenFilter, BearerTokenAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
-2025-05-20 14:18:18,563 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer :Tomcat started on port 8080 (http) with context path '/'
-2025-05-20 14:18:18,576 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :Started ApplicationServicesApplication in 7.187 seconds (process running for 7.613)
-2025-05-20 14:19:35,352 INFO  [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean :Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-05-20 14:19:35,354 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Shutdown initiated...
-2025-05-20 14:19:35,499 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Shutdown completed.
-2025-05-20 14:19:37,474 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :Starting ApplicationServicesApplication using Java 17.0.12 with PID 19932 (C:\Users\deepe\IdeaProjects\ATSLT\target\classes started by deepe in C:\Users\deepe\IdeaProjects\ATSLT)
-2025-05-20 14:19:37,476 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :No active profile set, falling back to 1 default profile: "default"
-2025-05-20 14:19:38,343 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate :Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-05-20 14:19:38,448 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate :Finished Spring Data repository scanning in 90 ms. Found 7 JPA repository interfaces.
-2025-05-20 14:19:39,280 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer :Tomcat initialized with port 8080 (http)
-2025-05-20 14:19:39,296 INFO  [main] org.apache.catalina.core.StandardService :Starting service [Tomcat]
-2025-05-20 14:19:39,297 INFO  [main] org.apache.catalina.core.StandardEngine :Starting Servlet engine: [Apache Tomcat/10.1.28]
-2025-05-20 14:19:39,388 INFO  [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] :Initializing Spring embedded WebApplicationContext
-2025-05-20 14:19:39,389 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext :Root WebApplicationContext: initialization completed in 1862 ms
-2025-05-20 14:19:39,597 INFO  [main] org.hibernate.jpa.internal.util.LogHelper :HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-05-20 14:19:39,691 INFO  [main] org.hibernate.Version :HHH000412: Hibernate ORM core version 6.5.2.Final
-2025-05-20 14:19:39,762 INFO  [main] org.hibernate.cache.internal.RegionFactoryInitiator :HHH000026: Second-level cache disabled
-2025-05-20 14:19:40,135 INFO  [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo :No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-05-20 14:19:40,158 INFO  [main] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Starting...
-2025-05-20 14:19:40,588 INFO  [main] com.zaxxer.hikari.pool.HikariPool :HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7ee2423
-2025-05-20 14:19:40,591 INFO  [main] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Start completed.
-2025-05-20 14:19:41,537 INFO  [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator :HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-05-20 14:19:42,271 INFO  [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean :Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-05-20 14:19:42,753 INFO  [main] org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer :Global AuthenticationManager configured with UserDetailsService bean with name userManagerConfig
-2025-05-20 14:19:43,014 WARN  [main] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration :spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-05-20 14:19:43,470 DEBUG [main] org.springframework.security.web.DefaultSecurityFilterChain :Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAccessTokenFilter, BearerTokenAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
-2025-05-20 14:19:43,763 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer :Tomcat started on port 8080 (http) with context path '/'
-2025-05-20 14:19:43,779 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :Started ApplicationServicesApplication in 6.825 seconds (process running for 7.363)
-2025-05-20 14:34:31,416 INFO  [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean :Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-05-20 14:34:31,447 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Shutdown initiated...
-2025-05-20 14:34:31,621 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Shutdown completed.
+2025-05-21 09:50:36,230 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :Starting ApplicationServicesApplication using Java 17.0.12 with PID 79988 (C:\Users\deepe\IdeaProjects\ATSLT\target\classes started by deepe in C:\Users\deepe\IdeaProjects\ATSLT)
+2025-05-21 09:50:36,247 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :No active profile set, falling back to 1 default profile: "default"
+2025-05-21 09:50:38,082 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate :Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-21 09:50:38,270 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate :Finished Spring Data repository scanning in 165 ms. Found 7 JPA repository interfaces.
+2025-05-21 09:50:39,874 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer :Tomcat initialized with port 8080 (http)
+2025-05-21 09:50:39,905 INFO  [main] org.apache.catalina.core.StandardService :Starting service [Tomcat]
+2025-05-21 09:50:39,906 INFO  [main] org.apache.catalina.core.StandardEngine :Starting Servlet engine: [Apache Tomcat/10.1.28]
+2025-05-21 09:50:40,064 INFO  [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] :Initializing Spring embedded WebApplicationContext
+2025-05-21 09:50:40,064 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext :Root WebApplicationContext: initialization completed in 3691 ms
+2025-05-21 09:50:40,358 INFO  [main] org.hibernate.jpa.internal.util.LogHelper :HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-21 09:50:40,478 INFO  [main] org.hibernate.Version :HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-05-21 09:50:40,554 INFO  [main] org.hibernate.cache.internal.RegionFactoryInitiator :HHH000026: Second-level cache disabled
+2025-05-21 09:50:41,197 INFO  [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo :No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-21 09:50:41,228 INFO  [main] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Starting...
+2025-05-21 09:50:41,966 INFO  [main] com.zaxxer.hikari.pool.HikariPool :HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@e5c5e6
+2025-05-21 09:50:41,971 INFO  [main] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Start completed.
+2025-05-21 09:50:43,320 INFO  [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator :HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-21 09:50:43,948 INFO  [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean :Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 09:50:44,669 INFO  [main] org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer :Global AuthenticationManager configured with UserDetailsService bean with name userManagerConfig
+2025-05-21 09:50:45,036 WARN  [main] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration :spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-21 09:50:45,642 DEBUG [main] org.springframework.security.web.DefaultSecurityFilterChain :Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAccessTokenFilter, BearerTokenAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-05-21 09:50:46,033 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer :Tomcat started on port 8080 (http) with context path '/'
+2025-05-21 09:50:46,049 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :Started ApplicationServicesApplication in 10.78 seconds (process running for 11.632)
+2025-05-21 10:03:53,949 INFO  [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean :Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 10:03:53,971 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Shutdown initiated...
+2025-05-21 10:03:54,118 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Shutdown completed.
+2025-05-21 10:22:05,693 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :Starting ApplicationServicesApplication using Java 17.0.12 with PID 38652 (C:\Users\deepe\IdeaProjects\ATSLT\target\classes started by deepe in C:\Users\deepe\IdeaProjects\ATSLT)
+2025-05-21 10:22:05,697 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :No active profile set, falling back to 1 default profile: "default"
+2025-05-21 10:22:07,106 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate :Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-05-21 10:22:07,229 INFO  [main] org.springframework.data.repository.config.RepositoryConfigurationDelegate :Finished Spring Data repository scanning in 111 ms. Found 7 JPA repository interfaces.
+2025-05-21 10:22:08,624 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer :Tomcat initialized with port 8080 (http)
+2025-05-21 10:22:08,650 INFO  [main] org.apache.catalina.core.StandardService :Starting service [Tomcat]
+2025-05-21 10:22:08,650 INFO  [main] org.apache.catalina.core.StandardEngine :Starting Servlet engine: [Apache Tomcat/10.1.28]
+2025-05-21 10:22:08,791 INFO  [main] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] :Initializing Spring embedded WebApplicationContext
+2025-05-21 10:22:08,792 INFO  [main] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext :Root WebApplicationContext: initialization completed in 3018 ms
+2025-05-21 10:22:09,101 INFO  [main] org.hibernate.jpa.internal.util.LogHelper :HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-05-21 10:22:09,222 INFO  [main] org.hibernate.Version :HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-05-21 10:22:09,300 INFO  [main] org.hibernate.cache.internal.RegionFactoryInitiator :HHH000026: Second-level cache disabled
+2025-05-21 10:22:09,864 INFO  [main] org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo :No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-05-21 10:22:09,895 INFO  [main] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Starting...
+2025-05-21 10:22:10,527 INFO  [main] com.zaxxer.hikari.pool.HikariPool :HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@79295932
+2025-05-21 10:22:10,530 INFO  [main] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Start completed.
+2025-05-21 10:22:11,931 INFO  [main] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator :HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-05-21 10:22:12,562 INFO  [main] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean :Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 10:22:13,231 INFO  [main] org.springframework.security.config.annotation.authentication.configuration.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer :Global AuthenticationManager configured with UserDetailsService bean with name userManagerConfig
+2025-05-21 10:22:13,619 WARN  [main] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration :spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-05-21 10:22:14,251 DEBUG [main] org.springframework.security.web.DefaultSecurityFilterChain :Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, LogoutFilter, JwtAccessTokenFilter, BearerTokenAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2025-05-21 10:22:14,709 INFO  [main] org.springframework.boot.web.embedded.tomcat.TomcatWebServer :Tomcat started on port 8080 (http) with context path '/'
+2025-05-21 10:22:14,727 INFO  [main] com.leverage.ApplicationServices.ApplicationServicesApplication :Started ApplicationServicesApplication in 9.836 seconds (process running for 10.621)
+2025-05-21 10:22:20,915 INFO  [SpringApplicationShutdownHook] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean :Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-05-21 10:22:20,918 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Shutdown initiated...
+2025-05-21 10:22:21,065 INFO  [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource :HikariPool-1 - Shutdown completed.

@@ -204,3 +204,4 @@ public class UserController {
 		return userService.getJobDetailsByMember(userId);
 	}
 }
+//comments
